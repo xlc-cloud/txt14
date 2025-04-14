@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>未命名小说-小蓝ccc</title>
     <style>
         body {
@@ -17,7 +16,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        。container {
+        .container {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
@@ -31,7 +30,7 @@
             transition: color 0.3s;
         }
 
-        。password-section {
+        .password-section {
             text-align: center;
             margin-bottom: 30px;
         }
@@ -150,10 +149,10 @@
 
 <body>
     <div class="container">
-        <h1>未命名小说-小蓝ccc</h1>
+        <h1>个人小说分享</h1>
 
         <div class="password-section" id="passwordSection">
-            <h3>输入密钥</h3>
+            <h3>神秘小数字</h3>
             <input type="password" id="passwordInput" placeholder="输入密码">
             <button onclick="checkPassword()">确认</button>
             <p id="passwordError" class="error"></p>
@@ -180,12 +179,33 @@
     </div>
 
     <script>
+        // 检测设备类型
+        function getDeviceType() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            if (/iphone|ipad|ipod/.test(userAgent)) {
+                return 'apple';
+            } else if (/android/.test(userAgent)) {
+                return 'android';
+            } else {
+                return 'computer';
+            }
+        }
+
+        // 不同设备对应的密码
+        const devicePasswords = {
+            apple: 'A4c2F-gH6k3-J7Lp8-mN9B5-qE4R7',
+            android: 'b3G9P-5tU6S-8yWz2-X1aD4-6HfK9',
+            computer: '2E5hI-L3J6M-9nP7Q-rT8sV-4WxZ1'
+        };
+
         // 密码验证
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
             const errorElement = document.getElementById('passwordError');
+            const deviceType = getDeviceType();
+            const correctPassword = devicePasswords[deviceType];
 
-            if (password === 'a2c4e-6g8i0-k3m5n-p7q9r-t1u3v') {
+            if (password === correctPassword) {
                 document.getElementById('passwordSection').style.display = 'none';
                 document.getElementById('readerSection').style.display = 'block';
                 loadNovel();
@@ -230,7 +250,7 @@
 手机震动的声音把李晨曦的思绪拉了回来，是万泽诚发来消息：“下午去社团报名不？”，对呀，高二开学，是报名社团的时间，一想到这点，李晨曦的心情好了不少，高二生活即将开始，在这个充满未知的高二，学业的压力、友情与懵懂情感的交织，究竟会将他带向何方？李晨曦握紧了手机，敲下几个字“去！下午见”。
 
 
-
+第二章 
 
 
 　　
@@ -263,7 +283,7 @@
 
 
 　　
-
+第三章
 清晨，阳光轻柔地穿过树叶的缝隙，在校园的地面上洒下一片片细碎的光影。李晨曦像往常一样，背着书包慢悠悠地走向教室。早读课之前，万泽诚就来找李晨曦聊天，他一把拉住李晨曦，兴奋地说：“晨曦，我刚打听到，学生会和广播站的结果明天就公布！” 李晨曦挑了挑眉，故意泼冷水：“哟，这么着急，怕自己没选上啊？”万泽诚白了他一眼，两人打闹了几句，就各自回教室了，对于学生会面试结果，李晨曦依旧抱着顺其自然的态度，没有过多的期待，也没有丝毫的焦虑。
 中午放学铃声响起，校园瞬间热闹起来，同学们成群结队地朝食堂走去。李晨曦、万泽诚和朱兰瑾三人在教学楼一楼集合，随着人流前行。万泽诚走在最前面，他一边走一边说着昨晚QQ群内的消息，这倒是提醒了三人，吃完午饭后要去图书馆参加社团活动。
 食堂里人头攒动，嘈杂的人声和餐具碰撞声交织在一起。打好饭，找了个靠窗的位置坐下。阳光透过明亮的窗户，洒在餐桌上。吃饭间，万泽诚还在滔滔不绝地说着各种趣事，朱兰瑾偶尔会反驳他几句，两人像对欢喜冤家一样。李晨曦则安静地吃着饭，听着他们的对话，适时地插上一两句嘴。不一会儿，三人吃完了饭，收拾好餐盘，便朝着图书馆走去。
@@ -292,7 +312,7 @@
 第四章 
 
 
-
+　　第四章
 清晨的薄雾还未散尽，李晨曦站在艺术楼前的台阶上呵了口气暖手。晨光给校园镀上一层柔和的淡金色，远处食堂飘来蒸包子的香气。
 "晨曦！"
 万泽诚的声音从林荫道那头传来。他小跑着靠近，校服外套随意地搭在肩上，露出里面皱巴巴的T恤。朱兰瑾跟在他身后，正在整理被风吹乱的刘海。
@@ -345,6 +365,7 @@
 第五章 
 
 
+　　第五章
 报告厅的玻璃窗将午后的阳光折射成细碎的光斑，在会议桌上织就一片碎金。李晨曦用指节无意识地敲击着桌面。前排的秦秋洵突然回头瞥了他一眼，细碎的星光在她眸中一闪而过。
 昨晚，学生会文体部的群聊界面弹出一则新公告。下个月，学校即将迎来建校30周年校庆。为了筹备相关活动，全体文体部成员需前往演艺厅一楼报告厅，负责向同学们传达校庆表演通知，并提醒参演同学做好发言准备。李晨曦作为民乐团中唯一加入文体部的成员，自然而然地肩负起了民乐团校庆表演的筹备重任。"李晨曦！"文体部部长敲了敲白板，"到你汇报民乐团节目了。"
 李晨曦猛地起身，校服衣摆带翻了桌上的矿泉水瓶。他手忙脚乱扶住瓶子时，余光瞥见秦秋洵正用笔在节目单上勾画着，笔尖悬停在他名字旁的曲目上。
@@ -375,6 +396,7 @@
 第六章 
 
 
+　　第六章
 秋初的中午，阳光不再似盛夏那般炽热，却依旧明亮，。道路两旁的树木，叶子开始微微泛黄，偶尔有一两片悄然飘落。李晨曦如往常一样早早下课，刚走到楼梯间转角处，一眼便瞥见了秦秋洵的身影。她静静地站在那里，神色略显落寞。李晨曦脚步加快，几步走到秦秋洵面前，微微喘着气，轻声问道：“昨晚睡得好吗？”秦秋洵抬起头，嘴角扯出一抹略显勉强的笑容，轻声说道：“没事的。”李晨曦看赶忙说道：“别担心，万泽诚和朱兰瑾已经去文具店了，说不定很快就能找到线索。”
 两人并肩在校园里漫步，刻意避开那些人多的地方，路过操场时，微风拂过，带着丝丝凉意，吹起秦秋洵额前的碎发，李晨曦下意识地抬手，想要帮她捋到耳后，手伸到一半又缩了回去。
 视角转到校外，万泽诚和朱兰瑾趁着午休，匆匆来的校外的文具店。万泽诚熟络地和老板打招呼，老板看到他，脸上露出一丝疑惑，“小万，今天咋有空来我这儿？”万泽诚也不兜圈子，直接说明了来意：“叔，我们想打听一下表白墙运营的事儿，您不是最近还找他打广告吗，您知道他们的联系方式不？”老板一听，脸色变得有些犹豫，“这……你们要找他干嘛，我和他们也就是有点生意往来，也不熟，只在网上聊过几句。”朱兰瑾赶忙走上前，语气诚恳地说道：“叔，有人在表白墙上发了一些不当的言论，您就帮帮我们吧。”老板看着两人急切的样子，叹了口气，“好吧，我就告诉你们，不过你们可别说是我说的。”说着，老板拿出手机，对着手机在纸条上写下一个QQ号递给他们。
@@ -413,7 +435,7 @@
 第七章 
 
 
-　
+　　第七章
 "第三排的古筝音准还需要调整。"
 李晨曦站在排练室中央，手中的签字笔在排练表上轻轻敲打。午后的阳光透过百叶窗，在他清瘦的轮廓上投下斑驳的光影。
 秦秋洵抱着记录本从后排走来，发梢随着脚步轻轻晃动："灯光组那边确认了，周三下午三点可以来联排。"
