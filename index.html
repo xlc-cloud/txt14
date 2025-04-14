@@ -153,7 +153,7 @@
         <h1>未命名小说-小蓝ccc</h1>
 
         <div class="password-section" id="passwordSection">
-            <h3>输入神秘小数字</h3>
+            <h3>输入密钥</h3>
             <input type="password" id="passwordInput" placeholder="输入密码">
             <button onclick="checkPassword()">确认</button>
             <p id="passwordError" class="error"></p>
@@ -185,7 +185,7 @@
             const password = document.getElementById('passwordInput').value;
             const errorElement = document.getElementById('passwordError');
 
-            if (password === '0001') {
+            if (password === 'a2c4e - 6g8i0 - k3m5n - p7q9r - t1u3v') {
                 document.getElementById('passwordSection').style.display = 'none';
                 document.getElementById('readerSection').style.display = 'block';
                 loadNovel();
