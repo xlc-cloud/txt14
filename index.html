@@ -1,31 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>未命名小说-小蓝ccc</title>
     <style>
-        /* 字体定义 */
-        @font-face {
-            font-family: 'SimSun';
-            src: local('SimSun'), local('宋体');
-        }
-        @font-face {
-            font-family: 'SimHei';
-            src: local('SimHei'), local('黑体');
-        }
-        @font-face {
-            font-family: 'KaiTi';
-            src: local('KaiTi'), local('楷体');
-        }
-        @font-face {
-            font-family: 'FangSong';
-            src: local('FangSong'), local('仿宋');
-        }
-
         body {
-            font-family: 'Microsoft YaHei', 'SimSun', sans-serif;
+            font-family: 'Microsoft YaHei', sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
@@ -33,7 +14,6 @@
             color: #333;
             transition: background-color 0.3s, color 0.3s;
         }
-
         .container {
             background-color: white;
             padding: 20px;
@@ -41,25 +21,21 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s;
         }
-
         h1 {
             text-align: center;
             color: #444;
             transition: color 0.3s;
         }
-
         .password-section {
             text-align: center;
             margin-bottom: 30px;
         }
-
         input[type="password"] {
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-right: 10px;
         }
-
         button {
             padding: 8px 15px;
             background-color: #4CAF50;
@@ -68,16 +44,13 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
         button:hover {
             background-color: #45a049;
         }
-
         .reader-section {
             display: none;
             margin-top: 20px;
         }
-
         .chapter-nav {
             display: flex;
             justify-content: space-between;
@@ -87,7 +60,6 @@
             border-radius: 4px;
             transition: background-color 0.3s;
         }
-
         .chapter-content {
             line-height: 1.6;
             padding: 15px;
@@ -96,17 +68,13 @@
             border-radius: 4px;
             min-height: 300px;
             white-space: pre-line;
-            /* 禁止复制 */
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
-            /* 每段开头缩进 */
             text-indent: 2em;
             transition: background-color 0.3s, color 0.3s;
-            font-family: inherit;
         }
-
         .chapter-list {
             margin-top: 20px;
             max-height: 200px;
@@ -116,66 +84,51 @@
             padding: 10px;
             transition: background-color 0.3s;
         }
-
         .chapter-item {
             padding: 5px 0;
             cursor: pointer;
             border-bottom: 1px solid #eee;
         }
-
         .chapter-item:hover {
             color: #4CAF50;
         }
-
         .error {
             color: red;
             margin-top: 10px;
         }
-
         .font-controls {
             margin: 10px 0;
             text-align: center;
         }
-
         .font-controls select {
             padding: 5px;
             border-radius: 4px;
             border: 1px solid #ddd;
-            font-size: 14px;
         }
-
-        /* 夜晚模式样式 */
         body.night-mode {
             background-color: #121212;
             color: #e0e0e0;
         }
-
         body.night-mode .container {
             background-color: #1e1e1e;
         }
-
         body.night-mode h1 {
             color: #e0e0e0;
         }
-
         body.night-mode .chapter-nav {
             background-color: #272727;
         }
-
         body.night-mode .chapter-content {
             background-color: #272727;
             color: #e0e0e0;
         }
-
         body.night-mode .chapter-list {
             background-color: #272727;
             border-color: #444;
         }
-
         body.night-mode .chapter-item {
             border-bottom-color: #444;
         }
-
         body.night-mode .font-controls select {
             background-color: #333;
             color: #e0e0e0;
@@ -183,28 +136,23 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <h1>未命名小说-小蓝ccc</h1>
-
         <div class="password-section" id="passwordSection">
             <h3>输入密钥</h3>
             <input type="password" id="passwordInput" placeholder="输入密码">
             <button onclick="checkPassword()">确认</button>
             <p id="passwordError" class="error"></p>
         </div>
-
         <div class="reader-section" id="readerSection">
             <h2>小说阅读器</h2>
-
             <div class="chapter-nav">
                 <button id="prevChapter" onclick="prevChapter()">上一章</button>
                 <span id="chapterTitle">第一章</span>
                 <button id="nextChapter" onclick="nextChapter()">下一章</button>
                 <button onclick="toggleNightMode()">夜晚模式</button>
             </div>
-
             <div class="font-controls">
                 <label for="fontSelector">字体选择：</label>
                 <select id="fontSelector" onchange="changeFont()">
@@ -217,17 +165,14 @@
                     <option value="'Times New Roman', serif">Times New Roman</option>
                 </select>
             </div>
-
             <div class="chapter-content" id="chapterContent">
                 <p>请稍候，正在加载小说内容...</p>
             </div>
-
             <div class="chapter-list" id="chapterList">
                 <p>章节列表将在这里显示</p>
             </div>
         </div>
     </div>
-
     <script>
         // 检测设备类型
         function getDeviceType() {
@@ -265,7 +210,25 @@
         }
 
         // 小说数据 - 请将您的小说文本粘贴在这里
-        const novelContent = `在这里粘贴你的小说内容`;
+        const novelContent = `第一章
+        哈！”
+秦秋洵突然从门侧蹦了出来，发梢随着动作飘动。见李晨曦神色如常，她不满地仰着脸看他：“怎么没吓到你？”
+李晨曦却没接她的话，而是问道：“你没生气？”
+“什么生气？”秦秋洵别过脸，佯装不知，阳光在她侧脸镀了层金边，“我没生气啊。”
+“那你刚刚……”
+“谁叫你不陪我去，吓唬吓唬你。”秦秋洵笑着说。
+李晨曦这才放下心来，紧紧拉住秦秋洵的袖口，“我陪你”
+秦秋洵仍然笑着“被吓到了吧！”
+李晨曦又好气又好笑，没有理会，拉着她的袖口就往楼梯间走。
+图书馆内漆黑一片。两人一同步入二楼会议室，会议安排是对志愿者进行点名并发放挂牌，如此，就只有秦秋洵持有挂牌。会议结束后，秦秋洵领着李晨曦找到老师：“老师，他是学生会的，也想帮忙，只是没登记名字。”老师态度热情：“行，但牌子都对应着名字，你没安排任务，所以没做你的牌子。我这有张出入证，你拿着就能跟志愿者一样在学校各处通行。”说着便递给李晨曦一张绿色卡片，两人连声道谢后，离开了会议室。
+两人一个戴着红牌，一个戴着绿牌，并肩来到正门口，大门还没开，门外有着家长带孩子的身影，门内清一色是红牌志愿者。秦秋洵快步来到自己的摊位前，摊位由一个铁桌子和一个小的遮阳棚组成，桌上放了一个二维码和扫码流程图，铁桌底是一个带蓝色的塑料箱，里面装满了洪悸中学的帆布袋。
+“到时候这样，”秦秋洵欢快地说，“我到外面去教人扫码，你在桌后让他们登记信息，然后给他们拿帆布袋。”李晨曦听话地点头，接着，两人就趴在桌上，看着大门口，等待大门开启。
+大门终于打开，一个中等身高的学生猛地冲了进来，周围家长纷纷投来诧异的目光——是万泽诚。万泽诚进门后环视一圈，在校服的身影中他一眼看到了绿色挂牌，然后定睛一看，是他要找的人没错了！
+“晨曦！”万泽诚大喊着冲过去，“你不是说只是扫个地吗，怎么还当志愿者了，本来还说让你陪我逛校庆呢！”
+李晨曦尴尬一笑：“我陪秦秋洵吧，你要不……”但他的话被万泽诚高声打断：“好哇你，要女朋友不要朋友……”李晨曦忙走出桌子，扯着万泽诚衣领拉到一边，秦秋洵憋着笑看着两人。
+“你找朱兰瑾去啊！”
+万泽诚噘嘴：“她不来，她下午才来看表演。”
+“这样，你也来帮我们，然后我中午请你吃饭。”万泽诚斟酌了一会儿，不情不愿地同意。`;
 
         let chapters = [];
         let currentChapterIndex = 0;
@@ -340,13 +303,7 @@
             const fontSelector = document.getElementById('fontSelector');
             const selectedFont = fontSelector.value;
             document.querySelector('.chapter-content').style.fontFamily = selectedFont;
-            
-            // 强制重绘
-            document.querySelector('.chapter-content').style.display = 'none';
-            document.querySelector('.chapter-content').offsetHeight; // 触发重绘
-            document.querySelector('.chapter-content').style.display = 'block';
         }
     </script>
 </body>
-
 </html>
