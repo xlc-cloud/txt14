@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>未命名小说-小蓝ccc</title>
     <style>
+        /* 定义自定义字体 */
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('KaiTi.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'SimSun';
+            src: url('SimSun.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             font-family: 'Microsoft YaHei', sans-serif;
             max-width: 800px;
@@ -49,7 +64,6 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin: 0 5px;
         }
 
         button:hover {
@@ -64,7 +78,6 @@
         .chapter-nav {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #f0f0f0;
@@ -80,10 +93,12 @@
             border-radius: 4px;
             min-height: 300px;
             white-space: pre-line;
+            /* 禁止复制 */
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
+            /* 每段开头缩进 */
             text-indent: 2em;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -113,22 +128,15 @@
             margin-top: 10px;
         }
 
-        .reader-controls {
-            display: flex;
-            justify-content: space-between;
-            margin: 15px 0;
-            flex-wrap: wrap;
+        .font-controls {
+            margin: 10px 0;
+            text-align: center;
         }
 
-        .font-controls, .size-controls {
-            margin: 5px 0;
-        }
-
-        .font-controls select, .size-controls select {
+        .font-controls select {
             padding: 5px;
             border-radius: 4px;
             border: 1px solid #ddd;
-            margin-left: 5px;
         }
 
         /* 夜晚模式样式 */
@@ -152,7 +160,6 @@
         body.night-mode .chapter-content {
             background-color: #272727;
             color: #e0e0e0;
-            border-color: #444;
         }
 
         body.night-mode .chapter-list {
@@ -164,8 +171,7 @@
             border-bottom-color: #444;
         }
 
-        body.night-mode .font-controls select,
-        body.night-mode .size-controls select {
+        body.night-mode .font-controls select {
             background-color: #333;
             color: #e0e0e0;
             border-color: #555;
@@ -194,29 +200,13 @@
                 <button onclick="toggleNightMode()">夜晚模式</button>
             </div>
 
-            <div class="reader-controls">
-                <div class="font-controls">
-                    <label for="fontSelector">字体：</label>
-                    <select id="fontSelector" onchange="changeFont()">
-                        <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
-                        <option value="'SimSun', serif">宋体</option>
-                        <option value="'SimHei', sans-serif">黑体</option>
-                        <option value="'KaiTi', serif">楷体</option>
-                        <option value="'FangSong', serif">仿宋</option>
-                        <option value="'Arial', sans-serif">Arial</option>
-                        <option value="'Times New Roman', serif">Times New Roman</option>
-                    </select>
-                </div>
-                
-                <div class="size-controls">
-                    <label for="sizeSelector">字号：</label>
-                    <select id="sizeSelector" onchange="changeSize()">
-                        <option value="14px">小</option>
-                        <option value="16px" selected>中</option>
-                        <option value="18px">大</option>
-                        <option value="20px">特大</option>
-                    </select>
-                </div>
+            <div class="font-controls">
+                <label for="fontSelector">字体选择：</label>
+                <select id="fontSelector" onchange="changeFont()">
+                    <option value="'Microsoft YaHei', sans-serif">系统默认</option>
+                    <option value="'SimSun', serif">宋体</option>
+                    <option value="'KaiTi', serif">楷体</option>
+                </select>
             </div>
 
             <div class="chapter-content" id="chapterContent">
@@ -341,13 +331,6 @@
             const fontSelector = document.getElementById('fontSelector');
             const selectedFont = fontSelector.value;
             document.querySelector('.chapter-content').style.fontFamily = selectedFont;
-        }
-
-        // 更改字号
-        function changeSize() {
-            const sizeSelector = document.getElementById('sizeSelector');
-            const selectedSize = sizeSelector.value;
-            document.querySelector('.chapter-content').style.fontSize = selectedSize;
         }
     </script>
 </body>
