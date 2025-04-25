@@ -49,6 +49,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin: 0 5px;
         }
 
         button:hover {
@@ -63,16 +64,12 @@
         .chapter-nav {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #f0f0f0;
             border-radius: 4px;
             transition: background-color 0.3s;
-        }
-
-        .chapter-content-container {
-            position: relative;
-            min-height: 300px;
         }
 
         .chapter-content {
@@ -83,19 +80,12 @@
             border-radius: 4px;
             min-height: 300px;
             white-space: pre-line;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
             text-indent: 2em;
             transition: background-color 0.3s, color 0.3s;
-            visibility: hidden;
-            position: absolute;
-            z-index: -1;
-        }
-
-        .chapter-image {
-            width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            display: block;
-            margin: 0 auto;
         }
 
         .chapter-list {
@@ -123,15 +113,22 @@
             margin-top: 10px;
         }
 
-        .font-controls {
-            margin: 10px 0;
-            text-align: center;
+        .reader-controls {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            flex-wrap: wrap;
         }
 
-        .font-controls select {
+        .font-controls, .size-controls {
+            margin: 5px 0;
+        }
+
+        .font-controls select, .size-controls select {
             padding: 5px;
             border-radius: 4px;
             border: 1px solid #ddd;
+            margin-left: 5px;
         }
 
         /* 夜晚模式样式 */
@@ -155,6 +152,7 @@
         body.night-mode .chapter-content {
             background-color: #272727;
             color: #e0e0e0;
+            border-color: #444;
         }
 
         body.night-mode .chapter-list {
@@ -166,7 +164,8 @@
             border-bottom-color: #444;
         }
 
-        body.night-mode .font-controls select {
+        body.night-mode .font-controls select,
+        body.night-mode .size-controls select {
             background-color: #333;
             color: #e0e0e0;
             border-color: #555;
@@ -195,31 +194,33 @@
                 <button onclick="toggleNightMode()">夜晚模式</button>
             </div>
 
-            <div class="font-controls">
-                <label for="fontSelector">字体选择：</label>
-                <select id="fontSelector" onchange="changeFont()">
-                    <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
-                    <option value="'SimSun', serif">宋体</option>
-                    <option value="'SimHei', sans-serif">黑体</option>
-                    <option value="'KaiTi', serif">楷体</option>
-                    <option value="'FangSong', serif">仿宋</option>
-                    <option value="'Arial', sans-serif">Arial</option>
-                    <option value="'Times New Roman', serif">Times New Roman</option>
-                </select>
-                <label for="fontSize">字号：</label>
-                <select id="fontSize" onchange="changeFont()">
-                    <option value="14px">小</option>
-                    <option value="16px" selected>中</option>
-                    <option value="18px">大</option>
-                    <option value="20px">特大</option>
-                </select>
+            <div class="reader-controls">
+                <div class="font-controls">
+                    <label for="fontSelector">字体：</label>
+                    <select id="fontSelector" onchange="changeFont()">
+                        <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
+                        <option value="'SimSun', serif">宋体</option>
+                        <option value="'SimHei', sans-serif">黑体</option>
+                        <option value="'KaiTi', serif">楷体</option>
+                        <option value="'FangSong', serif">仿宋</option>
+                        <option value="'Arial', sans-serif">Arial</option>
+                        <option value="'Times New Roman', serif">Times New Roman</option>
+                    </select>
+                </div>
+                
+                <div class="size-controls">
+                    <label for="sizeSelector">字号：</label>
+                    <select id="sizeSelector" onchange="changeSize()">
+                        <option value="14px">小</option>
+                        <option value="16px" selected>中</option>
+                        <option value="18px">大</option>
+                        <option value="20px">特大</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="chapter-content-container">
-                <div class="chapter-content" id="chapterContent">
-                    <p>请稍候，正在加载小说内容...</p>
-                </div>
-                <img id="chapterImage" class="chapter-image" alt="小说内容图片">
+            <div class="chapter-content" id="chapterContent">
+                <p>请稍候，正在加载小说内容...</p>
             </div>
 
             <div class="chapter-list" id="chapterList">
@@ -269,8 +270,6 @@
 
         let chapters = [];
         let currentChapterIndex = 0;
-        let currentFont = "'Microsoft YaHei', sans-serif";
-        let currentFontSize = "16px";
 
         // 加载小说
         function loadNovel() {
@@ -313,101 +312,7 @@
             const chapterTitle = chapter.match(/第[一二三四五六七八九十百千]+章/)[0];
             chapterTitleElement.textContent = chapterTitle;
             const contentStart = chapter.indexOf('\n', chapter.indexOf(chapterTitle) + chapterTitle.length);
-            chapterContentElement.innerHTML = chapter.slice(contentStart).trim().replace(/\n/g, '<br>');
-            
-            // 更新图片
-            updateChapterImage();
-        }
-
-        // 更新章节图片
-        function updateChapterImage() {
-            const chapterContent = document.getElementById('chapterContent');
-            const chapterImage = document.getElementById('chapterImage');
-            
-            // 获取容器尺寸
-            const container = document.querySelector('.chapter-content-container');
-            const width = container.offsetWidth;
-            const height = container.offsetHeight;
-            
-            // 创建canvas
-            const canvas = document.createElement('canvas');
-            const scale = window.devicePixelRatio || 1;
-            canvas.width = width * scale;
-            canvas.height = height * scale;
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
-            
-            const context = canvas.getContext('2d');
-            context.scale(scale, scale);
-            
-            // 设置背景和文字样式
-            const isNightMode = document.body.classList.contains('night-mode');
-            context.fillStyle = isNightMode ? '#272727' : '#fff';
-            context.fillRect(0, 0, width, height);
-            
-            context.font = currentFontSize + ' ' + currentFont;
-            context.fillStyle = isNightMode ? '#e0e0e0' : '#333';
-            context.textAlign = 'left';
-            
-            // 计算行高和段落间距
-            const lineHeight = parseInt(currentFontSize) * 1.6;
-            const paragraphSpacing = parseInt(currentFontSize) * 0.8;
-            
-            // 获取文本内容并分割段落
-            const text = chapterContent.textContent;
-            const paragraphs = text.split('\n');
-            
-            // 绘制文本
-            let y = 30; // 起始Y坐标
-            const padding = 15;
-            const maxWidth = width - padding * 2;
-            
-            paragraphs.forEach(paragraph => {
-                if (paragraph.trim() === '') return;
-                
-                // 处理段落缩进
-                const indentedParagraph = '　　' + paragraph.trim();
-                
-                // 分割文本行
-                const lines = wrapText(context, indentedParagraph, maxWidth);
-                
-                // 绘制每行文本
-                lines.forEach(line => {
-                    context.fillText(line, padding, y);
-                    y += lineHeight;
-                });
-                
-                y += paragraphSpacing;
-            });
-            
-            // 将canvas转为图片
-            chapterImage.src = canvas.toDataURL('image/png');
-        }
-
-        // 自动换行函数
-        function wrapText(context, text, maxWidth) {
-            const words = text.split('');
-            const lines = [];
-            let currentLine = '';
-            
-            for (let i = 0; i < words.length; i++) {
-                const testLine = currentLine + words[i];
-                const metrics = context.measureText(testLine);
-                const testWidth = metrics.width;
-                
-                if (testWidth > maxWidth && i > 0) {
-                    lines.push(currentLine);
-                    currentLine = words[i];
-                } else {
-                    currentLine = testLine;
-                }
-            }
-            
-            if (currentLine) {
-                lines.push(currentLine);
-            }
-            
-            return lines;
+            chapterContentElement.textContent = chapter.slice(contentStart).trim();
         }
 
         // 上一章
@@ -429,24 +334,21 @@
         // 切换夜晚模式
         function toggleNightMode() {
             document.body.classList.toggle('night-mode');
-            updateChapterImage();
         }
 
         // 更改字体
         function changeFont() {
             const fontSelector = document.getElementById('fontSelector');
-            const fontSizeSelector = document.getElementById('fontSize');
-            currentFont = fontSelector.value;
-            currentFontSize = fontSizeSelector.value;
-            updateChapterImage();
+            const selectedFont = fontSelector.value;
+            document.querySelector('.chapter-content').style.fontFamily = selectedFont;
         }
 
-        // 窗口大小改变时重新生成图片
-        window.addEventListener('resize', () => {
-            if (chapters.length > 0) {
-                updateChapterImage();
-            }
-        });
+        // 更改字号
+        function changeSize() {
+            const sizeSelector = document.getElementById('sizeSelector');
+            const selectedSize = sizeSelector.value;
+            document.querySelector('.chapter-content').style.fontSize = selectedSize;
+        }
     </script>
 </body>
 
