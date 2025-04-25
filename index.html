@@ -6,23 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>未命名小说-小蓝ccc</title>
     <style>
-        /* 定义自定义字体 */
-        @font-face {
-            font-family: 'KaiTi';
-            src: url('KaiTi.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        
+        /* 字体定义 */
         @font-face {
             font-family: 'SimSun';
-            src: url('SimSun.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
+            src: local('SimSun'), local('宋体');
+        }
+        @font-face {
+            font-family: 'SimHei';
+            src: local('SimHei'), local('黑体');
+        }
+        @font-face {
+            font-family: 'KaiTi';
+            src: local('KaiTi'), local('楷体');
+        }
+        @font-face {
+            font-family: 'FangSong';
+            src: local('FangSong'), local('仿宋');
         }
 
         body {
-            font-family: 'Microsoft YaHei', sans-serif;
+            font-family: 'Microsoft YaHei', 'SimSun', sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
@@ -101,6 +104,7 @@
             /* 每段开头缩进 */
             text-indent: 2em;
             transition: background-color 0.3s, color 0.3s;
+            font-family: inherit;
         }
 
         .chapter-list {
@@ -137,6 +141,7 @@
             padding: 5px;
             border-radius: 4px;
             border: 1px solid #ddd;
+            font-size: 14px;
         }
 
         /* 夜晚模式样式 */
@@ -203,9 +208,13 @@
             <div class="font-controls">
                 <label for="fontSelector">字体选择：</label>
                 <select id="fontSelector" onchange="changeFont()">
-                    <option value="'Microsoft YaHei', sans-serif">系统默认</option>
+                    <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
                     <option value="'SimSun', serif">宋体</option>
+                    <option value="'SimHei', sans-serif">黑体</option>
                     <option value="'KaiTi', serif">楷体</option>
+                    <option value="'FangSong', serif">仿宋</option>
+                    <option value="'Arial', sans-serif">Arial</option>
+                    <option value="'Times New Roman', serif">Times New Roman</option>
                 </select>
             </div>
 
@@ -331,6 +340,11 @@
             const fontSelector = document.getElementById('fontSelector');
             const selectedFont = fontSelector.value;
             document.querySelector('.chapter-content').style.fontFamily = selectedFont;
+            
+            // 强制重绘
+            document.querySelector('.chapter-content').style.display = 'none';
+            document.querySelector('.chapter-content').offsetHeight; // 触发重绘
+            document.querySelector('.chapter-content').style.display = 'block';
         }
     </script>
 </body>
