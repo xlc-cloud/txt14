@@ -86,6 +86,7 @@
             /* 每段开头缩进 */
             text-indent: 2em;
             transition: background-color 0.3s, color 0.3s;
+            font-family: inherit; /* 确保继承字体设置 */
         }
 
         .chapter-list {
@@ -122,7 +123,17 @@
             padding: 5px;
             border-radius: 4px;
             border: 1px solid #ddd;
+            margin-bottom: 10px;
         }
+
+        /* 字体样式 */
+        .font-song { font-family: "SimSun", "宋体", serif; }
+        .font-hei { font-family: "SimHei", "黑体", sans-serif; }
+        .font-kai { font-family: "KaiTi", "楷体", serif; }
+        .font-fangsong { font-family: "FangSong", "仿宋", serif; }
+        .font-yahei { font-family: "Microsoft YaHei", "微软雅黑", sans-serif; }
+        .font-arial { font-family: Arial, sans-serif; }
+        .font-times { font-family: "Times New Roman", serif; }
 
         /* 夜晚模式样式 */
         body.night-mode {
@@ -188,13 +199,13 @@
             <div class="font-controls">
                 <label for="fontSelector">字体选择：</label>
                 <select id="fontSelector" onchange="changeFont()">
-                    <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
-                    <option value="'SimSun', serif">宋体</option>
-                    <option value="'SimHei', sans-serif">黑体</option>
-                    <option value="'KaiTi', serif">楷体</option>
-                    <option value="'FangSong', serif">仿宋</option>
-                    <option value="'Arial', sans-serif">Arial</option>
-                    <option value="'Times New Roman', serif">Times New Roman</option>
+                    <option value="yahei">微软雅黑</option>
+                    <option value="song">宋体</option>
+                    <option value="hei">黑体</option>
+                    <option value="kai">楷体</option>
+                    <option value="fangsong">仿宋</option>
+                    <option value="arial">Arial</option>
+                    <option value="times">Times New Roman</option>
                 </select>
             </div>
 
@@ -245,7 +256,8 @@
         }
 
         // 小说数据 - 请将您的小说文本粘贴在这里
-        const novelContent = `在这里粘贴你的小说内容`;
+        const novelContent = `第一章
+        测试1`;
 
         let chapters = [];
         let currentChapterIndex = 0;
@@ -319,7 +331,17 @@
         function changeFont() {
             const fontSelector = document.getElementById('fontSelector');
             const selectedFont = fontSelector.value;
-            document.querySelector('.chapter-content').style.fontFamily = selectedFont;
+            const chapterContent = document.getElementById('chapterContent');
+            
+            // 移除所有字体类
+            chapterContent.classList.remove(
+                'font-song', 'font-hei', 'font-kai', 
+                'font-fangsong', 'font-yahei', 
+                'font-arial', 'font-times'
+            );
+            
+            // 添加选中的字体类
+            chapterContent.classList.add('font-' + selectedFont);
         }
     </script>
 </body>
