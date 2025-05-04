@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>未命名小说-小蓝ccc</title>
+    <title>未命名小说 - 小蓝ccc</title>
     <style>
         body {
             font-family: 'Microsoft YaHei', sans-serif;
@@ -14,7 +14,7 @@
             color: #333;
             transition: background-color 0.3s, color 0.3s;
         }
-       .container {
+      .container {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
@@ -26,7 +26,7 @@
             color: #444;
             transition: color 0.3s;
         }
-       .password-section {
+      .password-section {
             text-align: center;
             margin-bottom: 30px;
         }
@@ -34,7 +34,6 @@
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            margin-right: 10px;
         }
         button {
             padding: 8px 15px;
@@ -47,11 +46,11 @@
         button:hover {
             background-color: #45a049;
         }
-       .reader-section {
+      .reader-section {
             display: none;
             margin-top: 20px;
         }
-       .chapter-nav {
+      .chapter-nav {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
@@ -60,7 +59,7 @@
             border-radius: 4px;
             transition: background-color 0.3s;
         }
-       .chapter-content {
+      .chapter-content {
             line-height: 1.6;
             padding: 15px;
             background-color: #fff;
@@ -75,7 +74,7 @@
             text-indent: 2em;
             transition: background-color 0.3s, color 0.3s;
         }
-       .chapter-list {
+      .chapter-list {
             margin-top: 20px;
             max-height: 200px;
             overflow-y: auto;
@@ -84,15 +83,15 @@
             padding: 10px;
             transition: background-color 0.3s;
         }
-       .chapter-item {
+      .chapter-item {
             padding: 5px 0;
             cursor: pointer;
             border-bottom: 1px solid #eee;
         }
-       .chapter-item:hover {
+      .chapter-item:hover {
             color: #4CAF50;
         }
-       .error {
+      .error {
             color: red;
             margin-top: 10px;
         }
@@ -125,7 +124,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>未命名小说-小蓝ccc</h1>
+        <h1>未命名小说 - 小蓝ccc</h1>
         <div class="password-section" id="passwordSection">
             <h3>输入密钥</h3>
             <input type="password" id="passwordInput" placeholder="输入密码">
@@ -149,29 +148,11 @@
         </div>
     </div>
     <script>
-        // 检测设备类型
-        function getDeviceType() {
-            const userAgent = navigator.userAgent.toLowerCase();
-            if (/iphone|ipad|ipod/.test(userAgent)) {
-                return 'apple';
-            } else if (/android/.test(userAgent)) {
-                return 'android';
-            } else {
-                return 'computer';
-            }
-        }
-        // 不同设备对应的密码
-        const devicePasswords = {
-            apple: 'zc666',
-            android: 'zc666',
-            computer: 'zc666'
-        };
         // 密码验证
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
             const errorElement = document.getElementById('passwordError');
-            const deviceType = getDeviceType();
-            const correctPassword = devicePasswords[deviceType];
+            const correctPassword = 'zc666';
             if (password === correctPassword) {
                 document.getElementById('passwordSection').style.display = 'none';
                 document.getElementById('readerSection').style.display = 'block';
