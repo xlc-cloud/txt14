@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,33 +14,28 @@
             color: #333;
             transition: background-color 0.3s, color 0.3s;
         }
-
-        .container {
+       .container {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s;
         }
-
         h1 {
             text-align: center;
             color: #444;
             transition: color 0.3s;
         }
-
-        .password-section {
+       .password-section {
             text-align: center;
             margin-bottom: 30px;
         }
-
         input[type="password"] {
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-right: 10px;
         }
-
         button {
             padding: 8px 15px;
             background-color: #4CAF50;
@@ -50,17 +44,14 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
         button:hover {
             background-color: #45a049;
         }
-
-        .reader-section {
+       .reader-section {
             display: none;
             margin-top: 20px;
         }
-
-        .chapter-nav {
+       .chapter-nav {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
@@ -69,8 +60,7 @@
             border-radius: 4px;
             transition: background-color 0.3s;
         }
-
-        .chapter-content {
+       .chapter-content {
             line-height: 1.6;
             padding: 15px;
             background-color: #fff;
@@ -78,17 +68,14 @@
             border-radius: 4px;
             min-height: 300px;
             white-space: pre-line;
-            /* 禁止复制 */
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
-            /* 每段开头缩进 */
             text-indent: 2em;
             transition: background-color 0.3s, color 0.3s;
         }
-
-        .chapter-list {
+       .chapter-list {
             margin-top: 20px;
             max-height: 200px;
             overflow-y: auto;
@@ -97,117 +84,70 @@
             padding: 10px;
             transition: background-color 0.3s;
         }
-
-        .chapter-item {
+       .chapter-item {
             padding: 5px 0;
             cursor: pointer;
             border-bottom: 1px solid #eee;
         }
-
-        .chapter-item:hover {
+       .chapter-item:hover {
             color: #4CAF50;
         }
-
-        .error {
+       .error {
             color: red;
             margin-top: 10px;
         }
-
-        .font-controls {
-            margin: 10px 0;
-            text-align: center;
-        }
-
-        .font-controls select {
-            padding: 5px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-
         /* 夜晚模式样式 */
         body.night-mode {
             background-color: #121212;
             color: #e0e0e0;
         }
-
-        body.night-mode .container {
+        body.night-mode.container {
             background-color: #1e1e1e;
         }
-
         body.night-mode h1 {
             color: #e0e0e0;
         }
-
-        body.night-mode .chapter-nav {
+        body.night-mode.chapter-nav {
             background-color: #272727;
         }
-
-        body.night-mode .chapter-content {
+        body.night-mode.chapter-content {
             background-color: #272727;
             color: #e0e0e0;
         }
-
-        body.night-mode .chapter-list {
+        body.night-mode.chapter-list {
             background-color: #272727;
             border-color: #444;
         }
-
-        body.night-mode .chapter-item {
+        body.night-mode.chapter-item {
             border-bottom-color: #444;
-        }
-
-        body.night-mode .font-controls select {
-            background-color: #333;
-            color: #e0e0e0;
-            border-color: #555;
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <h1>未命名小说-小蓝ccc</h1>
-
         <div class="password-section" id="passwordSection">
             <h3>输入密钥</h3>
             <input type="password" id="passwordInput" placeholder="输入密码">
             <button onclick="checkPassword()">确认</button>
             <p id="passwordError" class="error"></p>
         </div>
-
         <div class="reader-section" id="readerSection">
             <h2>小说阅读器</h2>
-
             <div class="chapter-nav">
                 <button id="prevChapter" onclick="prevChapter()">上一章</button>
                 <span id="chapterTitle">第一章</span>
                 <button id="nextChapter" onclick="nextChapter()">下一章</button>
                 <button onclick="toggleNightMode()">夜晚模式</button>
             </div>
-
-            <div class="font-controls">
-                <label for="fontSelector">字体选择：</label>
-                <select id="fontSelector" onchange="changeFont()">
-                    <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
-                    <option value="'SimSun', serif">宋体</option>
-                    <option value="'SimHei', sans-serif">黑体</option>
-                    <option value="'KaiTi', serif">楷体</option>
-                    <option value="'FangSong', serif">仿宋</option>
-                    <option value="'Arial', sans-serif">Arial</option>
-                    <option value="'Times New Roman', serif">Times New Roman</option>
-                </select>
-            </div>
-
             <div class="chapter-content" id="chapterContent">
                 <p>请稍候，正在加载小说内容...</p>
             </div>
-
             <div class="chapter-list" id="chapterList">
                 <p>章节列表将在这里显示</p>
             </div>
         </div>
     </div>
-
     <script>
         // 检测设备类型
         function getDeviceType() {
@@ -220,21 +160,18 @@
                 return 'computer';
             }
         }
-
         // 不同设备对应的密码
         const devicePasswords = {
-            apple: 'A4c2F',
-            android: 'b3G9P',
-            computer: '2E5hI'
+            apple: 'zc666',
+            android: 'zc666',
+            computer: 'zc666'
         };
-
         // 密码验证
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
             const errorElement = document.getElementById('passwordError');
             const deviceType = getDeviceType();
             const correctPassword = devicePasswords[deviceType];
-
             if (password === correctPassword) {
                 document.getElementById('passwordSection').style.display = 'none';
                 document.getElementById('readerSection').style.display = 'block';
@@ -243,7 +180,6 @@
                 errorElement.textContent = '密码错误，请重试';
             }
         }
-
         // 小说数据 - 请将您的小说文本粘贴在这里
         const novelContent = `未命名小说​
 
@@ -592,12 +528,9 @@
 当晚，李晨曦发信息告诉万泽诚秦秋洵同意完密室了，万泽诚激动回复“OKOK，我给你安排，明天早上我们先去城中广场看升旗仪式，下午就去完密室，主题我都找好了，保证达成你的目的”
 “我能有什么目的［尴尬］？”
 
-
-　　`;
-
+`;
         let chapters = [];
         let currentChapterIndex = 0;
-
         // 加载小说
         function loadNovel() {
             // 分割章节
@@ -611,7 +544,6 @@
                 startIndex = match.index;
             }
             chapters.push(novelContent.slice(startIndex));
-
             // 显示章节列表
             const chapterList = document.getElementById('chapterList');
             chapterList.innerHTML = '';
@@ -626,11 +558,9 @@
                 });
                 chapterList.appendChild(chapterItem);
             });
-
             // 显示第一章
             showChapter();
         }
-
         // 显示当前章节
         function showChapter() {
             const chapterTitleElement = document.getElementById('chapterTitle');
@@ -641,7 +571,6 @@
             const contentStart = chapter.indexOf('\n', chapter.indexOf(chapterTitle) + chapterTitle.length);
             chapterContentElement.textContent = chapter.slice(contentStart).trim();
         }
-
         // 上一章
         function prevChapter() {
             if (currentChapterIndex > 0) {
@@ -649,7 +578,6 @@
                 showChapter();
             }
         }
-
         // 下一章
         function nextChapter() {
             if (currentChapterIndex < chapters.length - 1) {
@@ -657,19 +585,10 @@
                 showChapter();
             }
         }
-
         // 切换夜晚模式
         function toggleNightMode() {
             document.body.classList.toggle('night-mode');
         }
-
-        // 更改字体
-        function changeFont() {
-            const fontSelector = document.getElementById('fontSelector');
-            const selectedFont = fontSelector.value;
-            document.querySelector('.chapter-content').style.fontFamily = selectedFont;
-        }
     </script>
 </body>
-
 </html>
